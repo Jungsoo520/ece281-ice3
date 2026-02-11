@@ -24,13 +24,13 @@ architecture test_bench of ripple_adder_tb is
 	-- declare signals needed to stimulate the UUT inputs
 	signal w_addends     : std_logic_vector(7 downto 0) := x"00"; -- the numbers being added
 	signal w_sum         : std_logic_vector(3 downto 0) := x"0";
-	signal w_Cin, w_Cout : std_logic;
-
+	signal w_Cin  : std_logic := '0';
+    signal w_Cout : std_logic := '0';
 begin
 	-- PORT MAPS ----------------------------------------
 	ripple_adder_uut : ripple_adder port map (
-	   A    => w_addends(3 downto 0),
-	   B    => w_addends(7 downto 4),
+	   A    => w_addends(7 downto 4),
+	   B    => w_addends(3 downto 0),
 	   Cin  => w_Cin,
 	   S    => w_sum,
 	   Cout => w_Cout

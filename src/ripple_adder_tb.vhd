@@ -49,7 +49,16 @@ begin
        w_addends <= x"FF"; w_Cin <= '1'; wait for 10 ns;
 	       assert (w_sum = x"F" and w_Cout = '1') report "bad with ones" severity failure;
        -- TODO, a few other test cases
-	
+	   w_addends <= x"00"; w_Cin <= '1'; wait for 10 ns; 
+	       assert (w_sum = x"1" and w_Cout = '0') report "bad with Cin only" severity failure;
+	   w_addends <= x"34"; w_Cin <= '0'; wait for 10 ns;
+	       assert (w_sum = x"7" and w_Cout = '0') report "bad mid no carry" severity failure;
+	   w_addends <= x"88"; w_Cin <= '0'; wait for 10 ns;
+	       assert(w_sum = x"0" and w_Cout = '1') report "bad overflow case" severity failure;
+	   w_addends <= x"59"; w_Cin <= '0'; wait for 10 ns;
+	       assert (w_sum = x"E" and w_Cout = '0') report "bad random case" severity failure;
+	   w_addends <= x"78"; w_Cin <= '1'; wait for 10 ns;
+	       assert (w_sum = x"0" and w_Cout = '1') report "bad ripple case" severity failure;
 		wait; -- wait forever
 	end process;	
 	-----------------------------------------------------	
